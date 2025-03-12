@@ -12,6 +12,7 @@ interface ResponsiveImageProps {
   wrapperClassName?: string;
   priority?: boolean;
   fadeIn?: boolean;
+  fallbackSrc?: string;
   sizes?: string;
   breakpoints?: {
     sm?: number;
@@ -33,6 +34,7 @@ interface ResponsiveImageProps {
  *   width={1200}
  *   height={800}
  *   breakpoints={{ sm: 400, md: 600, lg: 800, xl: 1200 }}
+ *   fallbackSrc="/placeholder.jpg"
  * />
  * ```
  */
@@ -45,6 +47,7 @@ export function ResponsiveImage({
   wrapperClassName,
   priority = false,
   fadeIn = true,
+  fallbackSrc,
   sizes: customSizes,
   breakpoints = {
     sm: 640,
@@ -78,6 +81,7 @@ export function ResponsiveImage({
       wrapperClassName={wrapperClassName}
       priority={priority}
       fadeIn={fadeIn}
+      fallbackSrc={fallbackSrc}
       sizes={sizes}
       {...props}
     />

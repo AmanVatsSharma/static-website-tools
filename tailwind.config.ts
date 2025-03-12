@@ -23,6 +23,8 @@ export default {
         foreground: "var(--foreground)",
         primary: {
           DEFAULT: "#f16717",
+          light: "#f78346",
+          dark: "#e04e0f",
           50: "#fff8f0",
           100: "#feead8",
           200: "#fcd0b0",
@@ -37,6 +39,8 @@ export default {
         },
         secondary: {
           DEFAULT: "#2e7d32",
+          light: "#71bc74",
+          dark: "#27652a",
           50: "#f4fbf4",
           100: "#e5f6e6",
           200: "#cceacd",
@@ -138,6 +142,20 @@ export default {
           "0%": { opacity: "0", transform: "translateY(-6px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "border-beam": {
+          "0%": { "--border-angle": "0deg" },
+          "100%": { "--border-angle": "360deg" },
+        },
+        "spotlight": {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-72%, -62%) scale(0.5)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translate(-50%,-40%) scale(1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -146,6 +164,12 @@ export default {
         "fade-down": "fade-down 0.5s ease-out",
         "slide-up-fade": "slide-up-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
         "slide-down-fade": "slide-down-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "border-beam": "border-beam 4s linear infinite",
+        "spotlight": "spotlight 2s ease .75s 1 forwards",
+      },
+      transitionTimingFunction: {
+        "spring": "cubic-bezier(0.37, 0, 0.63, 1)",
+        "bounce": "cubic-bezier(0.22, 1, 0.36, 1)",
       },
     },
   },

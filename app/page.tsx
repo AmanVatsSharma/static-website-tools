@@ -21,7 +21,7 @@ const featuredProducts = [
     id: "brush-cutter-1",
     title: "Premium Brush Cutter BC-520",
     description: "High-performance brush cutter with 52cc engine, perfect for clearing thick vegetation and weeds.",
-    imageUrl: "/placeholder-product-1.jpg",
+    imageUrl: "/images/products/01.webp",
     category: "Brush Cutters",
     featured: true,
   },
@@ -29,7 +29,7 @@ const featuredProducts = [
     id: "chainsaw-1",
     title: "Professional Chainsaw CS-580",
     description: "Powerful 58cc chainsaw designed for professional use with advanced anti-vibration system.",
-    imageUrl: "/placeholder-product-2.jpg",
+    imageUrl: "/images/products/02.jpg",
     category: "Chainsaws",
     featured: true,
   },
@@ -37,7 +37,7 @@ const featuredProducts = [
     id: "seeder-1",
     title: "Manual Hand Seeder HS-100",
     description: "Efficient manual seeder for precise seed placement, saving time and reducing waste.",
-    imageUrl: "/placeholder-product-3.jpg",
+    imageUrl: "/images/products/03.webp",
     category: "Hand Seeders",
     featured: false,
   },
@@ -181,10 +181,10 @@ export default function Home() {
     <>
       <LanguagePopup onSelectLanguage={handleLanguageSelect} />
       <MainLayout language={language}>
-        <ComponentDiagnostics componentName="HeroSection">
+        {/* <ComponentDiagnostics componentName="HeroSection"> */}
 
           <HeroSection />
-        </ComponentDiagnostics>
+        {/* </ComponentDiagnostics> */}
 
         {/* Featured Products Section */}
         <section className="py-16 md:py-24">
@@ -233,7 +233,7 @@ export default function Home() {
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2 items-center">
               <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl">
                 <Image
-                  src="/placeholder-founder.jpg"
+                  src="/images/founder/01.jpg"
                   alt="Mr. Jitender Walia"
                   fill
                   className="object-cover"
