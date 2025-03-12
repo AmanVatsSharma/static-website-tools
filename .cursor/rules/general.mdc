@@ -1,0 +1,34 @@
+---
+description: general guidelines
+globs: 
+alwaysApply: true
+---
+# Enterprise Development Standards
+
+## Codebase Governance
+- @instrumentation.ts @package.json @app/not-found.tsx
+- 🚫 Strictly prevent duplicates - verify existing implementations before adding new code
+- ✅ Mandatory pre-task checklist completion (create/update checklist.md per feature)
+- 📁 File structure hierarchy must be enforced based on existing patterns
+
+## Implementation Standards
+- 🔍 Context-aware environment handling (see instrumentation.ts VERCEL_ENV checks)
+- 🛡 TypeScript-first approach with strict null checks and type validation
+- ⚡ Next.js App Router patterns required (reference not-found.tsx Suspense usage)
+- 🚨 Error handling must follow existing try/catch patterns with structured logging
+
+## UI Development
+- ♻️ Atomic component architecture enforced (matching not-found.tsx client component pattern)
+- 📦 Shared UI library required for reusable components (create components/ui/ if missing)
+- 🖥 SSR/SSG optimization mandatory (follow not-found.tsx Suspense implementation)
+- 📝 Component documentation required via JSDoc (example in not-found.tsx)
+
+## Code Quality
+- 🔄 PR review required for all changes (reference package.json lint/test scripts)
+- 📈 Performance budgets enforced (align with analyze scripts in package.json)
+- 🧹 Technical debt tracking mandatory (create tech-debt.md if missing)
+
+## Documentation
+- 📘 Living architecture decision records (create adr/ directory if missing)
+- 🔗 Cross-link existing patterns (like instrumentation.ts env handling)
+- 🆕 Onboarding checklist for new developers (update README.md with setup steps)

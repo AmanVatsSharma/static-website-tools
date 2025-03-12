@@ -2,20 +2,147 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
+    --background: #ffffff;
+    --foreground: #171717;
+    
+    --primary: #f16717;
+    --primary-foreground: #ffffff;
+    
+    --secondary: #2e7d32;
+    --secondary-foreground: #ffffff;
+    
+    --accent: #ffc107;
+    --accent-foreground: #171717;
+    
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    
+    --destructive: #ef4444;
+    --destructive-foreground: #f8fafc;
+    
+    --card: #ffffff;
+    --card-foreground: #171717;
+    
+    --popover: #ffffff;
+    --popover-foreground: #171717;
+    
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #e2e8f0;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
     --background: #0a0a0a;
     --foreground: #ededed;
+    
+    --primary: #f16717;
+    --primary-foreground: #ffffff;
+    
+    --secondary: #2e7d32;
+    --secondary-foreground: #ffffff;
+    
+    --accent: #ffc107;
+    --accent-foreground: #171717;
+    
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    
+    --destructive: #ef4444;
+    --destructive-foreground: #f8fafc;
+    
+    --card: #111111;
+    --card-foreground: #ededed;
+    
+    --popover: #111111;
+    --popover-foreground: #ededed;
+    
+    --border: #1e293b;
+    --input: #1e293b;
+    --ring: #1e293b;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  h4 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+  h5 {
+    @apply text-lg md:text-xl;
+  }
+  h6 {
+    @apply text-base md:text-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .scroll-container {
+    position: relative !important;
+    transform: translate3d(0, 0, 0);
+  }
+  /* Utilities for Framer Motion scroll features */
+  .motion-safe-container {
+    position: relative !important;
+    overflow: visible !important;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+  .parallax-container {
+    position: relative !important;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+  }
+  /* Fix for Framer Motion animation positioning issues */
+  .motion-component {
+    position: relative !important;
+    transform: translate3d(0, 0, 0);
+  }
+  .motion-carousel-item {
+    position: relative !important;
+    transform: translate3d(0, 0, 0);
+  }
+  /* New utility specifically for elements using useScroll */
+  .scroll-trigger {
+    position: relative !important; /* IMPORTANT: position must be non-static for Framer Motion useScroll */
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
+  }
+  
+  /* Fix for parent elements to ensure they have non-static positioning */
+  .scroll-fix-container,
+  .scroll-fix-container * {
+    position: relative !important;
+  }
 }

@@ -1,0 +1,20 @@
+---
+description: frontend guidelines
+globs: 
+alwaysApply: true
+---
+# Super Frontend Developer Agent Rules
+
+- Get inspiration from Shadcn, Accernity UI, and 21st Dev.
+- Use modern web technologies.
+- Integrate libraries such as Tailwind CSS and shadcnUI.
+- Build pixel-perfect, responsive, and performance-optimized websites.
+- Adhere to best practices in accessibility, SEO, and user experience.
+- Implement dynamic animations, transitions, and interactive elements.
+-with components always have a deep thik and designing of the backgound too and make excellent background
+- Ensure code is clean, scalable, and rigorously tested.
+- Innovate relentlessly to create mind-blowing frontend experiences.
+- You can @ files here.
+- You can use markdown but dont have to.
+
+*Even Chuck Norris's browser would be impressed!*  
