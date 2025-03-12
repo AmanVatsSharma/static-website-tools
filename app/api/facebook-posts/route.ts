@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-// Mock data for Facebook posts
+// Mock data for Facebook posts (fallback if API fails)
 const MOCK_POSTS = [
   {
     id: "post1",
@@ -32,29 +32,72 @@ const MOCK_POSTS = [
 ];
 
 export async function GET() {
-  // In a real implementation, this would fetch data from the Facebook Graph API
-  
-  // Example of how this might work with the real Facebook Graph API:
-  // const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
-  // const pageId = process.env.FACEBOOK_PAGE_ID;
-  // const limit = 3;
-  // 
-  // const response = await fetch(
-  //   `https://graph.facebook.com/v18.0/${pageId}/posts?fields=id,message,created_time,attachments{media},likes.summary(true),comments.summary(true),shares&limit=${limit}&access_token=${accessToken}`
-  // );
-  // 
-  // const data = await response.json();
-  // 
-  // const posts = data.data.map((post) => ({
-  //   id: post.id,
-  //   content: post.message || "",
-  //   imageUrl: post.attachments?.data[0]?.media?.image?.src || null,
-  //   likes: post.likes?.summary?.total_count || 0,
-  //   comments: post.comments?.summary?.total_count || 0,
-  //   shares: post.shares?.count || 0,
-  //   publishedAt: post.created_time,
-  // }));
-  
-  // For now, just return the mock data
-  return NextResponse.json({ posts: MOCK_POSTS });
+  try {
+    const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
+    const pageId = process.env.FACEBOOK_PAGE_ID || '000000000000000'; // Default placeholder page ID
+    const limit = 6;
+    
+    // Check if access token is available
+    if (!accessToken) {
+      console.log('Facebook access token not found. Using mock data.');
+      return NextResponse.json({ posts: MOCK_POSTS });
+    }
+    
+    // Fetch posts from the Facebook Graph API
+    const response = await fetch(
+      `https://graph.facebook.com/v18.0/${pageId}/posts?fields=id,message,created_time,attachments{media},likes.summary(true),comments.summary(true),shares&limit=${limit}&access_token=${accessToken}`,
+      { next: { revalidate: 3600 } } // Cache for 1 hour
+    );
+    
+    if (!response.ok) {
+      throw new Error(`Facebook Graph API failed with status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (!data.data || !Array.isArray(data.data)) {
+      throw new Error('Invalid response format from Facebook API');
+    }
+    
+    // Process and format the Facebook posts
+    const posts = data.data.map((post: any) => {
+      // Get the image URL if available
+      let imageUrl = null;
+      try {
+        if (post.attachments && 
+            post.attachments.data && 
+            post.attachments.data[0] && 
+            post.attachments.data[0].media && 
+            post.attachments.data[0].media.image) {
+          imageUrl = post.attachments.data[0].media.image.src;
+        }
+      } catch (e) {
+        console.error('Error extracting image URL:', e);
+      }
+      
+      // Get social metrics with fallbacks to 0
+      const likes = post.likes?.summary?.total_count || 0;
+      const comments = post.comments?.summary?.total_count || 0;
+      const shares = post.shares?.count || 0;
+      
+      return {
+        id: post.id,
+        content: post.message || "Visit our page to see this post!",
+        imageUrl,
+        likes,
+        comments,
+        shares,
+        publishedAt: post.created_time,
+      };
+    });
+    
+    return NextResponse.json({ posts });
+  } catch (error) {
+    console.error('Error fetching Facebook posts:', error);
+    // Fallback to mock data in case of any API errors
+    return NextResponse.json({ 
+      posts: MOCK_POSTS,
+      error: 'Failed to fetch real Facebook data. Using mock data instead.'
+    });
+  }
 } 

@@ -84,7 +84,8 @@ const enhancedBentoFeatures = [
     description: "Built with the highest quality materials for durability and reliability in tough farming conditions.",
     icon: <Shield className="h-6 w-6" />,
     size: "md" as const,
-    hoverEffect: "zoom" as const,
+    hoverEffect: "spotlight" as const,
+    glassEffect: "medium" as const,
     className: "bg-gradient-to-br from-white to-orange-50 dark:from-gray-900 dark:to-gray-800/80",
   },
   {
@@ -92,7 +93,8 @@ const enhancedBentoFeatures = [
     description: "Reduce your carbon footprint while maximizing efficiency with our environmentally sustainable machinery.",
     icon: <Leaf className="h-6 w-6" />,
     size: "sm" as const,
-    hoverEffect: "lift" as const,
+    hoverEffect: "tilt" as const,
+    glassEffect: "light" as const,
   },
   {
     title: "Exceptional Performance",
@@ -100,6 +102,7 @@ const enhancedBentoFeatures = [
     icon: <Zap className="h-6 w-6" />,
     size: "lg" as const,
     hoverEffect: "glow" as const,
+    glassEffect: "heavy" as const,
     className: "bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800/80",
   },
   {
@@ -107,14 +110,16 @@ const enhancedBentoFeatures = [
     description: "Save valuable time and focus on other important aspects of your farming business.",
     icon: <Clock className="h-6 w-6" />,
     size: "sm" as const,
-    hoverEffect: "rotate" as const,
+    hoverEffect: "floating" as const,
+    glassEffect: "medium" as const,
   },
   {
     title: "Expert Support Team",
     description: "Our agricultural experts provide ongoing support and guidance to ensure optimal use of our products.",
     icon: <Users className="h-6 w-6" />,
     size: "lg" as const,
-    hoverEffect: "lift" as const,
+    hoverEffect: "magnetic" as const,
+    glassEffect: "medium" as const,
     className: "bg-gradient-to-br from-white to-green-50 dark:from-gray-900 dark:to-gray-800/80",
   },
   {
@@ -122,7 +127,8 @@ const enhancedBentoFeatures = [
     description: "Specifically designed for Indian agricultural conditions and farming practices.",
     icon: <Tractor className="h-6 w-6" />,
     size: "md" as const,
-    hoverEffect: "zoom" as const,
+    hoverEffect: "lift" as const,
+    glassEffect: "light" as const,
     className: "bg-gradient-to-br from-white to-yellow-50 dark:from-gray-900 dark:to-gray-800/80",
   },
   {
@@ -130,7 +136,8 @@ const enhancedBentoFeatures = [
     description: "Boost your farm's productivity and efficiency, leading to better financial outcomes.",
     icon: <BarChart className="h-6 w-6" />,
     size: "sm" as const,
-    hoverEffect: "glow" as const,
+    hoverEffect: "rotate" as const,
+    glassEffect: "heavy" as const,
   },
 ];
 
@@ -295,6 +302,9 @@ export default function Home() {
             : "हमारे उत्पाद भारतीय किसान को ध्यान में रखकर डिज़ाइन किए गए हैं, जो गुणवत्ता, प्रदर्शन और मूल्य को जोड़ते हैं।"}
           features={enhancedBentoFeatures}
           useInteractive={true}
+          useAdvancedBackground={true}
+          useGradientText={true}
+          layout="masonry"
         />
 
         {/* Testimonials Section */}
@@ -311,6 +321,12 @@ export default function Home() {
             : "हमारे उत्पादों और वे आपकी कृषि उत्पादकता में कैसे सुधार कर सकते हैं, इसके बारे में अधिक जानने के लिए आज ही हमसे संपर्क करें।"}
           primaryButtonText={language === "en" ? "Call Now" : "अभी कॉल करें"}
           secondaryButtonText={language === "en" ? "WhatsApp Us" : "हमें व्हाट्सएप करें"}
+          bgVariant="standard" // Options: "standard", "gradient", "dark", "light"
+          // testimonial={{
+          //   quote: "The AWE brush cutter has transformed how I maintain my farm. It's powerful and reliable.",
+          //   author: "Rajesh Kumar",
+          //   role: "Wheat Farmer, Punjab"
+          // }}
         />
       </MainLayout>
     </>
