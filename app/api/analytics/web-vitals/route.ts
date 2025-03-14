@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { WebVitalMetric } from '@/lib/web-vitals';
 
+// For static export, we need to mark this route as static
+export const dynamic = 'force-static';
+
 /**
  * API route for receiving Web Vitals metrics
  * 

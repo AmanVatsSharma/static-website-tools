@@ -18,6 +18,8 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: true,
   },
+  // Setting output to export for static deployment
+  output: 'export'
 };
 
 export default nextConfig;

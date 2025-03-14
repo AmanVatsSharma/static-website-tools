@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+// For static export, we need to mark this route as static
+export const dynamic = 'force-static';
+
 // Mock data for YouTube videos (fallback if API fails)
 const MOCK_VIDEOS = [
   {

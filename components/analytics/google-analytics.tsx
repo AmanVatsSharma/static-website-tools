@@ -2,21 +2,13 @@
 
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 
 // Replace with your actual Google Analytics measurement ID
 const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
 
-/**
- * GoogleAnalytics component for tracking page views and events
- * 
- * @component
- * @example
- * ```tsx
- * <GoogleAnalytics />
- * ```
- */
-export function GoogleAnalytics() {
+// Analytics Content component that uses useSearchParams
+function AnalyticsContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   
@@ -29,7 +21,20 @@ export function GoogleAnalytics() {
       page_path: url,
     });
   }, [pathname, searchParams]);
-  
+
+  return null;
+}
+
+/**
+ * GoogleAnalytics component for tracking page views and events
+ * 
+ * @component
+ * @example
+ * ```tsx
+ * <GoogleAnalytics />
+ * ```
+ */
+export function GoogleAnalytics() {
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
     return null;
   }
@@ -55,6 +60,9 @@ export function GoogleAnalytics() {
           `,
         }}
       />
+      <Suspense fallback={null}>
+        <AnalyticsContent />
+      </Suspense>
     </>
   );
 }
@@ -74,10 +82,6 @@ export function trackEvent(action: string, params: Record<string, any> = {}) {
 // Declare gtag for TypeScript
 declare global {
   interface Window {
-    gtag: (
-      command: 'config' | 'event' | 'set',
-      targetId: string,
-      config?: Record<string, any>
-    ) => void;
+    gtag: (...args: any[]) => void;
   }
 } 

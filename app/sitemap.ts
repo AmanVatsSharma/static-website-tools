@@ -1,5 +1,8 @@
 import { MetadataRoute } from 'next';
 
+// For static export, we need to mark this route as static
+export const dynamic = 'force-static';
+
 // Product categories and their slugs
 const productCategories = [
   { slug: 'brush-cutters', name: 'Brush Cutters' },
@@ -28,7 +31,8 @@ const products = [
  * @returns {MetadataRoute.Sitemap} The sitemap entries
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://awe-machinery.com';
+  // For static export, we need to ensure the baseUrl is properly set
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://awe-machinery.com';
   
   // Core pages
   const corePages = [
