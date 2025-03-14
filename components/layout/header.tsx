@@ -367,7 +367,7 @@ export function Header({ className, language = "en", setLanguage }: HeaderProps)
               whileTap={{ scale: 0.95 }}
               className="relative"
             >
-              <ThemeToggle />
+              <ThemeToggle className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md" />
               <motion.div 
                 className="absolute inset-0 rounded-full border border-primary/20"
                 animate={{ 
